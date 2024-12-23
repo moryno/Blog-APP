@@ -1,5 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 import { IoClose } from "react-icons/io5";
 import { MdMenu } from "react-icons/md";
 import Image from "./Image";
@@ -43,7 +49,13 @@ const Navbar = () => {
         <Link to={"/"}>Trending</Link>
         <Link to={"/"}>Most Popular</Link>
         <Link to={"/"}>About</Link>
-        <Link to={"/"}>Login</Link>
+
+        <SignedOut>
+          <Link to={"/login"}>Sign in</Link>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
     </div>
   );
