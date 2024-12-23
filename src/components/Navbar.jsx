@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import { MdMenu } from "react-icons/md";
-import { Link } from "react-router-dom";
+import Image from "./Image";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -9,7 +10,13 @@ const Navbar = () => {
   return (
     <div className="w-full h-16 md:h-20 flex items-center justify-between">
       <div className="flex items-center gap-4 text-2xl font-bold">
-        <img src="/logo.png" className="w-8 h-8" alt="logo" />
+        <Image
+          src="logo.png"
+          className="w-8 h-8"
+          alt="logo"
+          width={32}
+          height={32}
+        />
         <span>spikelogo</span>
       </div>
       <div className="md:hidden">
