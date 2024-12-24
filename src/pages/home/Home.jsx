@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { BsDot } from "react-icons/bs";
 import MainCategories from "./components/MainCategories";
+import FeaturedPost from "./components/FeaturedPost";
 
 const Home = () => {
   return (
@@ -60,6 +61,7 @@ const Home = () => {
         </Link>
       </sectin>
       <MainCategories />
+      <FeaturedPost />
     </main>
   );
 };
