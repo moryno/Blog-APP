@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Image from "../../components/Image";
 import PostMenuActions from "./components/PostMenuActions";
+import Comments from "./components/Comments";
 
 const SinglePost = () => {
   return (
@@ -35,7 +36,7 @@ const SinglePost = () => {
         </div>
       </section>
       <section className="flex flex-col md:flex-row gap-8">
-        <div className="lg:text-lg flex flex-col gap-6 text-justify mb-8">
+        <div className="lg:text-lg flex flex-col gap-6 text-justify">
           <p>
             Contrary to popular belief, Lorem Ipsum is not simply random text.
             It has roots in a piece of classical Latin literature from 45 BC,
@@ -197,6 +198,7 @@ const SinglePost = () => {
           </div>
         </div>
       </section>
+      <Comments />
     </main>
   );
 };
