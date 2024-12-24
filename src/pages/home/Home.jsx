@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { BsDot } from "react-icons/bs";
 import MainCategories from "./components/MainCategories";
 import FeaturedPost from "./components/FeaturedPost";
+import PostList from "../posts/components/PostList";
 
 const Home = () => {
   return (
@@ -62,6 +63,10 @@ const Home = () => {
       </sectin>
       <MainCategories />
       <FeaturedPost />
+      <section>
+        <h1 className="my-8 text-2xl text-gray-600">Recent Posts</h1>
+        <PostList />
+      </section>
     </main>
   );
 };
