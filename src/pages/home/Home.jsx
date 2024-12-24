@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { BsDot } from "react-icons/bs";
+import MainCategories from "./components/MainCategories";
 
 const Home = () => {
   return (
@@ -21,7 +22,7 @@ const Home = () => {
             ever since the 1500s
           </p>
         </div>
-        <Link to="/compose" className="relative">
+        <Link to="/compose" className="hidden md:block relative">
           <svg
             viewBox="0 0 200 200"
             width="200"
@@ -58,6 +59,7 @@ const Home = () => {
           </button>
         </Link>
       </sectin>
+      <MainCategories />
     </main>
   );
 };
