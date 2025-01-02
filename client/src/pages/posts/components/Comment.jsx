@@ -1,32 +1,21 @@
+import moment from "moment";
 import Image from "../../../components/Image";
 
-const Comment = () => {
+const Comment = ({ comment }) => {
   return (
-    <div className="p-4 bg-slate-50 rounded-xl mb-8">
+    <div className="p-4 bg-slate-50 rounded-xl">
       <div className="flex items-center gap-4">
         <Image
-          src="userImg.jpeg"
-          alt="This is commentor avatar"
+          src={comment.user.profileImage || "userImg.jpeg"}
+          alt={comment.user.username}
           width="40"
           className="w-10 h-10 rounded-full object-cover"
         />
-        <span className="font-medium">John Doe</span>
-        <span className="text-sm">2 days ago</span>
+        <span className="font-medium">{comment.user.username}</span>
+        <span className="text-sm">{moment(comment.createdAt).fromNow()}</span>
       </div>
       <div className="mt-4">
-        <p>
-          {" "}
-          Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply
-          dummy text of the printing Lorem Ipsum is simply dummy text of the
-          printing Lorem Ipsum is simply dummy text of the printing Lorem Ipsum
-          is simply dummy text of the printing Lorem Ipsum is simply dummy text
-          of the printing Lorem Ipsum is simply dummy text of the printing Lorem
-          Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy
-          text of the printing Lorem Ipsum is simply dummy text of the printing
-          Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply
-          dummy text of the printing Lorem Ipsum is simply dummy text of the
-          printing
-        </p>
+        <p>{comment.description}</p>
       </div>
     </div>
   );
