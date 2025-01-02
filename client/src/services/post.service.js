@@ -6,6 +6,12 @@ const getPosts = async (params) => {
   });
   return data;
 };
+const getPost = async (slug) => {
+  const { data } = await axios.get(
+    `${import.meta.env.VITE_API_URL}/posts/${slug}`
+  );
+  return data;
+};
 const createPost = (post, token) => {
   return axios.post(`${import.meta.env.VITE_API_URL}/posts`, post, {
     headers: {
@@ -37,6 +43,7 @@ const authenticator = async () => {
 
 export const postService = {
   getPosts,
+  getPost,
   createPost,
   authenticator,
 };
