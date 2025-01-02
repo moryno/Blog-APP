@@ -11,6 +11,10 @@ const postSchema = new Schema(
     cover: {
       type: String,
     },
+    category: {
+      type: String,
+      default: "general",
+    },
     slug: {
       type: String,
       required: true,

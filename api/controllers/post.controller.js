@@ -1,3 +1,4 @@
+import ImageKit from "imagekit";
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 
@@ -18,8 +19,18 @@ export const createPost = async (req, res) => {
 
   const user = await User.findOne({ clerkUserId });
 
+  if (!user) return res.status(404).json("User not found!");
+
+  const postTitleExist = await Post.findOne({ title: req.body.title });
+
+  if (postTitleExist)
+    return res.status(404).json("The post with same title already exist.");
+
+  const slug = req.body.title.replace(/ /g, "-").toLowerCase();
+
   const newPost = new Post({
     author: user._id,
+    slug,
     ...req.body,
   });
 
@@ -43,4 +54,15 @@ export const deletePost = async (req, res) => {
     return res.status(404).json("You can only delete your post.");
 
   res.status(204).json("Post has been deleted.");
+};
+
+const imagekit = new ImageKit({
+  urlEndpoint: process.env.IK_URL_ENDPOINT,
+  publicKey: process.env.IK_PUBLIC_KEY,
+  privateKey: process.env.IK_PRIVATE_KEY,
+});
+
+export const uploadAuth = async (req, res) => {
+  const result = imagekit.getAuthenticationParameters();
+  res.send(result);
 };

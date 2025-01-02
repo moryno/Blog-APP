@@ -1,5 +1,7 @@
 import express from "express";
-import { clerkMiddleware, requireAuth } from "@clerk/express";
+import { clerkMiddleware } from "@clerk/express";
+import cors from "cors";
+
 import userRoutes from "./routes/user.route.js";
 import postRoutes from "./routes/post.route.js";
 import commentRoutes from "./routes/comment.route.js";
@@ -11,6 +13,16 @@ const app = express();
 app.use(clerkMiddleware());
 app.use("/webhooks", webhookRoutes);
 app.use(express.json());
+app.use(cors(process.env.CLIENT_URL));
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
