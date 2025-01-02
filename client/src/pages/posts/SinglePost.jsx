@@ -1,35 +1,43 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Image from "../../components/Image";
 import PostMenuActions from "./components/PostMenuActions";
 import Comments from "./components/Comments";
+import { useQuery } from "@tanstack/react-query";
+import { postService } from "../../services/post.service";
+import moment from "moment";
 
 const SinglePost = () => {
+  const { slug } = useParams();
+
+  const { isPending, error, data } = useQuery({
+    queryKey: [`post-${slug}`, slug],
+    queryFn: () => postService.getPost(slug),
+  });
+
+  if (isPending) return <p>Loading...</p>;
+  if (!isPending && error) return "An error has occured: " + error.message;
+  if (!data) return "Post not found.";
+
   return (
     <main className="flex flex-col gap-8">
       <section className="flex gap-8">
         <div className="lg:w-3/5 flex flex-col gap-8">
           <h1 className="text-xl md:text-3xl xl:text-4xl 2xl:text-5xl font-semibold">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            {data.title}
           </h1>
           <div className="flex items-center gap-2 text-gray-400 text-sm">
             <span>Author</span>
-            <Link className="text-blue-800">John Doe</Link>
+            <Link className="text-blue-800">{data.author.username}</Link>
             <span>on</span>
-            <Link className="text-blue-800">Web Design</Link>
-            <span>10 days ago</span>
+            <Link className="text-blue-800">{data.category}</Link>
+            <span>{moment(data.createdAt).fromNow()}</span>
           </div>
-          <p className="text-gray-500 font-medium">
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia,
-          </p>
+          <p className="text-gray-500 font-medium">{data.description}</p>
         </div>
         <div className="hidden lg:block w-2/5">
           <Image
-            src="postImg.jpeg"
-            alt="This is post cover"
+            src={data.cover || "postImg.jpeg"}
+            alt={data.title}
             width="600"
             className="rounded-xl"
           />
@@ -151,14 +159,14 @@ const SinglePost = () => {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <Image
-                src="userImg.jpeg"
-                alt="This is author avatar"
+                src={data.author.profileImage || "userImg.jpeg"}
+                alt={data.author.username}
                 width="48"
                 height="48"
                 className="w-12 h-12 rounded-full object-cover"
               />
               <Link to="/" className="text-xs font-medium">
-                John Doe
+                {data.author.username}
               </Link>
             </div>
             <p className="text-xs text-gray-500">
@@ -198,7 +206,7 @@ const SinglePost = () => {
           </div>
         </div>
       </section>
-      <Comments />
+      <Comments postId={data._id} />
     </main>
   );
 };
