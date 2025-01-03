@@ -15,7 +15,7 @@ const createComment = (comment, token) => {
   });
 };
 const deleteComment = (id, token) => {
-  return axios.post(`${import.meta.env.VITE_API_URL}/comments/${id}`, {
+  return axios.delete(`${import.meta.env.VITE_API_URL}/comments/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

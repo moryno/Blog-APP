@@ -4,6 +4,7 @@ import { commentService } from "../../../services/comment.service";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Comments = ({ postId }) => {
   const [comment, setComment] = useState("");
@@ -11,6 +12,7 @@ const Comments = ({ postId }) => {
   const { getToken } = useAuth();
   const { user } = useUser();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { isPending, error, data } = useQuery({
     queryKey: ["comments", postId],
@@ -29,6 +31,7 @@ const Comments = ({ postId }) => {
     onError: (error) => {
       const err = error.response;
       toast.error(`${err.status === 404 ? err.data : err.statusText}`);
+      navigate("/login");
     },
   });
 
@@ -71,8 +74,8 @@ const Comments = ({ postId }) => {
                 description: `${createMutation.variables.description} (posting...)`,
                 createdAt: new Date(),
                 user: {
-                  profileImage: user.imageUrl,
-                  username: user.username,
+                  profileImage: user?.imageUrl,
+                  username: user?.username,
                 },
               }}
             />
