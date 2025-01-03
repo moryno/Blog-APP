@@ -53,9 +53,29 @@ const PostMenuActions = ({ post }) => {
     },
   });
 
+  const featurePostMutation = useMutation({
+    mutationFn: async () => {
+      const token = await getToken();
+      return postService.featurePost({ postId: post._id }, token);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [`post-${post.slug}`, post.slug],
+      });
+    },
+    onError: (error) => {
+      const err = error.response;
+      toast.error(`${err.status === 404 ? err.data : err.statusText}`);
+    },
+  });
+
   const onDelete = () => {
     deletePostMutation.mutate();
   };
+  const onFeature = () => {
+    featurePostMutation.mutate();
+  };
+
   const onSavePost = () => {
     if (!user) {
       navigate("/login");
@@ -90,7 +110,38 @@ const PostMenuActions = ({ post }) => {
           <span className="text-xs">(in progress)</span>
         )}
       </div>
-
+      {isAdmin && (
+        <div
+          onClick={onFeature}
+          className="flex items-center gap-2 py-2 text-sm cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 48 48"
+            width="20px"
+            height="20px"
+          >
+            <path
+              d="M24 2L29 16.26L44 18.18L33 29.24L35.82 44L24 37L12.18 44L15 29.24L4 18.18L18.61 16.26L24 2Z"
+              stroke="black"
+              strokeWidth="2"
+              fill={
+                featurePostMutation.isPending
+                  ? post.isFeatured
+                    ? "none"
+                    : "black"
+                  : post.isFeatured
+                  ? "black"
+                  : "none"
+              }
+            />
+          </svg>
+          <span>Feature post</span>
+          {featurePostMutation.isPending && (
+            <span className="text-xs">(in progress)</span>
+          )}
+        </div>
+      )}
       {user && (post.author.username === user.username || isAdmin) && (
         <div
           onClick={onDelete}

@@ -26,6 +26,13 @@ const deletePost = (postId, token) => {
     },
   });
 };
+const featurePost = (postId, token) => {
+  return axios.patch(`${import.meta.env.VITE_API_URL}/posts/feature`, postId, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 const authenticator = async () => {
   try {
@@ -54,4 +61,5 @@ export const postService = {
   createPost,
   deletePost,
   authenticator,
+  featurePost,
 };
