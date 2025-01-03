@@ -54,9 +54,17 @@ export const deletePost = async (req, res) => {
 
   if (!clerkUserId) return res.status(401).json("Not Authenticated!");
 
-  const user = await User.findOne({ clerkUserId });
+  const role = req.auth.sessionClaims?.metadata?.role || "user";
 
-  const deletedPost = await Post.findByIdAndDelete({
+  if (role === "admin") {
+    await Post.findByIdAndDelete(req.params.id);
+    return res.status(204).json("Post has been deleted.");
+  }
+
+  const user = await User.findOne({ clerkUserId });
+  if (!user) return res.status(404).json("User not found!");
+
+  const deletedPost = await Post.findOneAndDelete({
     _id: req.params.id,
     author: user._id,
   });
