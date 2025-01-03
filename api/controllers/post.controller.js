@@ -75,6 +75,29 @@ export const deletePost = async (req, res) => {
   res.status(204).json("Post has been deleted.");
 };
 
+export const featurePost = async (req, res) => {
+  const clerkUserId = req.auth.userId;
+  const postId = req.body.postId;
+
+  if (!clerkUserId) return res.status(401).json("Not Authenticated!");
+
+  const role = req.auth.sessionClaims?.metadata?.role || "user";
+
+  if (role !== "admin") return res.status(401).json("Not Authorized.");
+
+  const post = await Post.findById(postId);
+
+  if (!post) return res.status(404).json("Post Not Found");
+  const isFeatured = post.isFeatured;
+  const updatedPost = await Post.findByIdAndUpdate(
+    postId,
+    { isFeatured: !isFeatured },
+    { new: true }
+  );
+
+  res.status(204).json(updatedPost);
+};
+
 const imagekit = new ImageKit({
   urlEndpoint: process.env.IK_URL_ENDPOINT,
   publicKey: process.env.IK_PUBLIC_KEY,
