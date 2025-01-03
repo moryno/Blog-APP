@@ -12,11 +12,7 @@ const PostMenuActions = ({ post }) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const {
-    isPending,
-    error,
-    data: savedPosts,
-  } = useQuery({
+  const { data: savedPosts } = useQuery({
     queryKey: [`savedPosts`],
     queryFn: async () => {
       const token = await getToken();
@@ -24,6 +20,7 @@ const PostMenuActions = ({ post }) => {
     },
   });
 
+  const isAdmin = user?.publicMetadata?.role === "admin" || false;
   const isSaved = savedPosts?.data?.some((p) => p === post._id) || false;
 
   const savePostMutation = useMutation({
@@ -94,7 +91,7 @@ const PostMenuActions = ({ post }) => {
         )}
       </div>
 
-      {user && post.author.username === user.username && (
+      {user && (post.author.username === user.username || isAdmin) && (
         <div
           onClick={onDelete}
           className="flex items-center gap-2 py-2 text-red-500 text-sm cursor-pointer"
