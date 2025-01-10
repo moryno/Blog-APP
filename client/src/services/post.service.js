@@ -33,6 +33,12 @@ const featurePost = (postId, token) => {
     },
   });
 };
+const getFeatured = async () => {
+  const { data } = await axios.get(
+    `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=newest`
+  );
+  return data;
+};
 
 const authenticator = async () => {
   try {
@@ -62,4 +68,5 @@ export const postService = {
   deletePost,
   authenticator,
   featurePost,
+  getFeatured,
 };

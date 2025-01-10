@@ -21,7 +21,7 @@ export const getPosts = async (req, res) => {
     query.title = { $regex: searchQuery, $options: "i" };
   }
   if (featured) {
-    query.featured = true;
+    query.isFeatured = true;
   }
   if (author) {
     const writer = await User.findOne({ username: author }).select("_id");
