@@ -1,7 +1,27 @@
-import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import SearchComponent from "../../../components/SearchComponent";
 
 const FilterComponent = () => {
+  const [searchparams, setSearchParams] = useSearchParams();
+
+  const handleFilterChange = (e) => {
+    if (searchparams.get("sort") !== e.target.value) {
+      setSearchParams({
+        ...Object.fromEntries(searchparams.entries()),
+        sort: e.target.value,
+      });
+    }
+  };
+
+  const handleCategoryChange = (category) => {
+    console.log(category);
+    if (searchparams.get("category") !== category) {
+      setSearchParams({
+        ...Object.fromEntries(searchparams.entries()),
+        category,
+      });
+    }
+  };
   return (
     <div className="px-4 h-max sticky top-8">
       <h1 className="mb-4 text-sm font-medium">Search</h1>
@@ -15,6 +35,7 @@ const FilterComponent = () => {
           <input
             type="radio"
             name="sort"
+            onChange={handleFilterChange}
             value="newest"
             id="newest"
             className="appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm checked:bg-blue-800"
@@ -28,6 +49,7 @@ const FilterComponent = () => {
           <input
             type="radio"
             name="sort"
+            onChange={handleFilterChange}
             value="popular"
             id="popular"
             className="appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm checked:bg-blue-800"
@@ -41,6 +63,7 @@ const FilterComponent = () => {
           <input
             type="radio"
             name="sort"
+            onChange={handleFilterChange}
             value="trending"
             id="trending"
             className="appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm checked:bg-blue-800"
@@ -54,6 +77,7 @@ const FilterComponent = () => {
           <input
             type="radio"
             name="sort"
+            onChange={handleFilterChange}
             value="oldest"
             id="oldest"
             className="appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm checked:bg-blue-800"
@@ -63,24 +87,42 @@ const FilterComponent = () => {
       </div>
       <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
       <div className="flex flex-col gap-2 text-sm">
-        <Link to="" className="underline">
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("general")}
+        >
           All
-        </Link>
-        <Link to="" className="underline">
+        </span>
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("web-design")}
+        >
           Web Design
-        </Link>
-        <Link to="" className="underline">
+        </span>
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("development")}
+        >
           Development
-        </Link>
-        <Link to="" className="underline">
+        </span>
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("databases")}
+        >
           Databases
-        </Link>
-        <Link to="" className="underline">
+        </span>
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("seo")}
+        >
           Search Engines
-        </Link>
-        <Link to="" className="underline">
+        </span>
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("marketing")}
+        >
           Marketing
-        </Link>
+        </span>
       </div>
     </div>
   );

@@ -9,7 +9,10 @@ const SearchComponent = () => {
     if (e.key === "Enter") {
       const query = e.target.value;
       if (location.pathname === "/posts") {
-        setSearchParams({ ...Object.fromEntries(searchparams), search: query });
+        setSearchParams({
+          ...Object.fromEntries(searchparams.entries()),
+          search: query,
+        });
       } else {
         navigate(`/posts?search=${query}`);
       }

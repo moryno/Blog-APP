@@ -6,7 +6,7 @@ import { postService } from "../../../services/post.service";
 import { useSearchParams } from "react-router-dom";
 
 const PostList = () => {
-  const [searchparams, setSearchParams] = useSearchParams();
+  const [searchparams] = useSearchParams();
 
   const {
     data,
