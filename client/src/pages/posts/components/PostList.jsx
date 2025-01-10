@@ -3,8 +3,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import PostListItem from "./PostListItem";
 import { postService } from "../../../services/post.service";
+import { useSearchParams } from "react-router-dom";
 
 const PostList = () => {
+  const [searchparams, setSearchParams] = useSearchParams();
+
   const {
     data,
     error,
@@ -13,9 +16,16 @@ const PostList = () => {
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["posts"],
-    queryFn: ({ pageParam = 1 }) =>
-      postService.getPosts({ page: pageParam, limit: 5 }),
+    queryKey: ["posts", searchparams.toString()],
+    queryFn: ({ pageParam = 1 }) => {
+      const searchParamsObj = Object.fromEntries([...searchparams]);
+
+      return postService.getPosts({
+        page: pageParam,
+        limit: 5,
+        ...searchParamsObj,
+      });
+    },
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) =>
       lastPage.hasMore ? pages.length + 1 : undefined,
