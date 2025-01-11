@@ -10,7 +10,7 @@ const PostListItem = ({ post }) => {
           src={post.cover || "postImg.jpeg"}
           alt={post.title || "This is post cover"}
           width="735"
-          className="rounded-2xl object-cover"
+          className="rounded-lg shadow-md object-cover"
         />
       </div>
       <div className="flex flex-col gap-4 xl:w-2/3">
@@ -21,21 +21,21 @@ const PostListItem = ({ post }) => {
           <span>Author</span>
           <Link
             to={`/posts?author=${post.author.username}`}
-            className="text-blue-800"
+            className="text-teal-700"
           >
             {post.author.username}
           </Link>
           <span>on</span>
           <Link
             to={`/posts?category=${post.category}`}
-            className="text-blue-800 capitalize"
+            className="text-teal-700 capitalize"
           >
             {post.category}
           </Link>
           <span>{moment(post.createdAt).fromNow()}</span>
         </div>
         <p>{post.description}</p>
-        <Link to={`${post.slug}`} className="underline text-blue-800 text-sm">
+        <Link to={`${post.slug}`} className="underline text-teal-700 text-sm">
           Read More
         </Link>
       </div>
