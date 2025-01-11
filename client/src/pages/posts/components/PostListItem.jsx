@@ -35,7 +35,7 @@ const PostListItem = ({ post }) => {
           <span>{moment(post.createdAt).fromNow()}</span>
         </div>
         <p>{post.description}</p>
-        <Link to={`${post.slug}`} className="underline text-teal-700 text-sm">
+        <Link to={`/${post.slug}`} className="underline text-teal-700 text-sm">
           Read More
         </Link>
       </div>

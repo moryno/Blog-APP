@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Image from "./Image";
 
-const MenuPost = () => {
+const MenuPost = ({ featured = true, category = null }) => {
   return (
     <div className="flex flex-col gap-8 mt-5 mb-14">
       <div className="flex items-center gap-5">

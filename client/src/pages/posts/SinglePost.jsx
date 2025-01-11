@@ -1,18 +1,28 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import DOMPurify from "dompurify";
+import { useQuery } from "@tanstack/react-query";
+import moment from "moment";
+
 import Image from "../../components/Image";
 import PostMenuActions from "./components/PostMenuActions";
 import Comments from "./components/Comments";
-import { useQuery } from "@tanstack/react-query";
 import { postService } from "../../services/post.service";
-import moment from "moment";
+import MenuPost from "../../components/MenuPost";
+import Categories from "../../components/Categories";
 
 const SinglePost = () => {
   const { slug } = useParams();
+
+  const navigate = useNavigate();
 
   const { isPending, error, data } = useQuery({
     queryKey: [`post-${slug}`, slug],
     queryFn: () => postService.getPost(slug),
   });
+
+  const handleCategoryChange = (category) => {
+    navigate(`/posts?category=${category}`);
+  };
 
   if (isPending) return <p>Loading...</p>;
   if (!isPending && error) return "An error has occured: " + error.message;
@@ -39,122 +49,41 @@ const SinglePost = () => {
             src={data.cover || "postImg.jpeg"}
             alt={data.title}
             width="600"
-            className="rounded-xl"
+            className="rounded-lg shadow-md"
           />
         </div>
       </section>
       <section className="flex flex-col md:flex-row gap-8">
-        <div className="lg:text-lg flex flex-col gap-6 text-justify">
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source.
-          </p>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source.
-          </p>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source.
-          </p>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source.
-          </p>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source.
-          </p>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source.
-          </p>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source.
-          </p>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source.
-          </p>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source.
-          </p>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source.
-          </p>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source.
-          </p>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source.
-          </p>
+        <div className="lg:text-lg flex flex-col gap-6 text-justify w-[70%] 3xl:w-[75%]">
+          <div
+            className="prose lg:prose-lg sm:px-0 md:px-0 lg:px-0"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(data?.content),
+            }}
+          />
+          <div className="flex justify-start">
+            <button
+              onClick={() => navigate(-1)}
+              className="sm:text-sm cursor-pointer bg-teal-700 hover:bg-teal-900 text-white font-bold py-2 px-4 rounded flex items-center"
+            >
+              <svg
+                stroke="currentColor"
+                fill="currentColor"
+                strokeWidth={0}
+                viewBox="0 0 24 24"
+                height="25"
+                width="25"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path>
+              </svg>{" "}
+              &nbsp; Back
+            </button>
+          </div>
+          <Comments postId={data._id} />
         </div>
-        <div className="px-4 h-max sticky top-8">
+        <div className="px-4 h-max sticky top-8 w-[30%] 3xl:w-[25%]">
+          {/*    SIDE PANEL   */}
           <h1 className="mb-4 text-sm font-medium">Author</h1>
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
@@ -165,48 +94,41 @@ const SinglePost = () => {
                 height="48"
                 className="w-12 h-12 rounded-full object-cover"
               />
-              <Link to="/" className="text-xs font-medium">
-                {data.author.username}
-              </Link>
+              <div className="flex flex-col gap-1">
+                <Link to="/" className="text-[13px] font-medium">
+                  {data.author.username}
+                </Link>
+                <p className="text-xs text-gray-500 font-medium">
+                  {moment(data.createdAt).format("D MMMM YYYY")}
+                </p>
+              </div>
             </div>
-            <p className="text-xs text-gray-500">
-              Lorem Ipsum is simply dummy text of the printing
-            </p>
           </div>
-          <div className="flex gap-2">
-            <Link to="/">
-              <Image src="facebook.svg" alt="This is facebook icon" />
-            </Link>
-            <Link to="/">
-              <Image src="instagram.svg" alt="This is instagram icon" />
-            </Link>
-          </div>
-
           <PostMenuActions post={data} />
-          <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
-          <div className="flex flex-col gap-2 text-sm">
-            <Link to="" className="underline">
-              All
-            </Link>
-            <Link to="" className="underline">
-              Web Design
-            </Link>
-            <Link to="" className="underline">
-              Development
-            </Link>
-            <Link to="" className="underline">
-              Databases
-            </Link>
-            <Link to="" className="underline">
-              Search Engines
-            </Link>
-            <Link to="" className="underline">
-              AI
-            </Link>
+
+          {/*      EDITORS PICK     */}
+          <p className="mt-8 text-gray-500 text-sm font-normal">
+            Similar topic
+          </p>
+          <div className="lg:mb-8 sm:py-5 md:py-0 flex gap-2">
+            <h1 className="text-lg font-bold tracking-tight text-left text-gray-900 underline underline-offset-8 decoration-teal-700">
+              Related Posts
+            </h1>
           </div>
+          <MenuPost category={data.category} />
+
+          {/*      CATEGORIES     */}
+          <p className="mt-8 text-gray-500 text-sm font-normal">
+            Discover by topic
+          </p>
+          <div className="lg:mb-8 sm:py-5 md:py-0 flex gap-2">
+            <h1 className="text-lg font-bold tracking-tight text-left text-gray-900 underline underline-offset-8 decoration-teal-700">
+              Categories
+            </h1>
+          </div>
+          <Categories onCategoryChange={handleCategoryChange} />
         </div>
       </section>
-      <Comments postId={data._id} />
     </main>
   );
 };
