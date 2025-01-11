@@ -3,6 +3,7 @@ import { BsDot } from "react-icons/bs";
 import MainCategories from "./components/MainCategories";
 import FeaturedPost from "./components/FeaturedPost";
 import PostList from "../posts/components/PostList";
+import Sidebar from "../../components/Sidebar";
 
 const Home = () => {
   return (
@@ -10,7 +11,7 @@ const Home = () => {
       <section className="flex gap-2 items-center">
         <Link to="/">Home</Link>
         <BsDot />
-        <span className="text-blue-800">Blogs and Articles</span>
+        <span className="text-teal-700">Blogs and Articles</span>
       </section>
       <sectin className="flex items-center justify-between">
         <div>
@@ -45,7 +46,7 @@ const Home = () => {
               </textPath>
             </text>
           </svg>
-          <button className="absolute top-0 left-0 right-0 bottom-0 m-auto h-20 w-20 bg-blue-800 rounded-full flex items-center justify-center">
+          <button className="absolute top-0 left-0 right-0 bottom-0 m-auto h-20 w-20 bg-teal-700 rounded-full flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -63,9 +64,16 @@ const Home = () => {
       </sectin>
       <MainCategories />
       <FeaturedPost />
-      <section>
-        <h1 className="my-8 text-2xl text-gray-600">Recent Posts</h1>
-        <PostList />
+      <section className="flex gap-8">
+        <section className="w-[70%] 3xl:w-[75%]">
+          <h1 className="my-8  text-3xl font-bold tracking-tight text-gray-900">
+            Recent Posts
+          </h1>
+          <PostList />
+        </section>
+        <section className="w-[30%] 3xl:w-[25%]">
+          <Sidebar />
+        </section>
       </section>
     </main>
   );
