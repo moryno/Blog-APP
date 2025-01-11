@@ -23,13 +23,13 @@ const FeaturedPost = () => {
           src={posts[0].cover || "featured1.jpeg"}
           alt={posts[0].title}
           width="895"
-          className="rounded-3xl object-cover"
+          className="rounded-lg object-cover shadow-md"
         />
         <div className="flex items-center gap-4">
           <h1 className="flex items-center gap-4">01.</h1>
           <Link
             to={`/posts?category=${posts[0].category}`}
-            className="text-blue-800 lg:text-lg"
+            className="text-teal-700 lg:text-lg"
           >
             {posts[0].category}
           </Link>
@@ -43,6 +43,10 @@ const FeaturedPost = () => {
         >
           {posts[0].title}
         </Link>
+        <p className="sm:mb-2 md:mb-5 font-normal text-gray-700 dark:text-gray-400 lg:block hidden line-short">
+          {" "}
+          {posts[0].description}
+        </p>
       </div>
       <div className="w-full lg:w-1/2 flex flex-col gap-4">
         {posts[1] && (
@@ -51,7 +55,7 @@ const FeaturedPost = () => {
               <Image
                 src={posts[1].cover || "featured2.jpeg"}
                 alt={posts[1].title}
-                className="rounded-3xl object-cover w-full h-full"
+                className="rounded-lg object-cover w-full h-full shadow-md"
                 width="298"
               />
             </div>
@@ -61,7 +65,7 @@ const FeaturedPost = () => {
                 <h1 className="font-semibold">02.</h1>
                 <Link
                   to={`/posts?category=${posts[1].category}`}
-                  className="text-blue-800"
+                  className="text-teal-700"
                 >
                   {posts[1].category}
                 </Link>
@@ -85,7 +89,7 @@ const FeaturedPost = () => {
               <Image
                 src={posts[2].cover || "featured3.jpeg"}
                 alt={posts[2].title}
-                className="rounded-3xl object-cover w-full h-full"
+                className="rounded-lg object-cover w-full h-full shadow-md"
                 width="298"
               />
             </div>
@@ -95,7 +99,7 @@ const FeaturedPost = () => {
                 <h1 className="font-semibold">03.</h1>
                 <Link
                   to={`/posts?category=${posts[2].category}`}
-                  className="text-blue-800"
+                  className="text-teal-700"
                 >
                   {posts[2].category}
                 </Link>
@@ -119,7 +123,7 @@ const FeaturedPost = () => {
               <Image
                 src={posts[3].cover || "featured4.jpeg"}
                 alt={posts[3].title}
-                className="rounded-3xl object-cover w-full h-full"
+                className="rounded-lg object-cover w-full h-full shadow-md"
                 width="298"
               />
             </div>
@@ -129,7 +133,7 @@ const FeaturedPost = () => {
                 <h1 className="font-semibold">04.</h1>
                 <Link
                   to={`/posts?category=${posts[3].category}`}
-                  className="text-blue-800"
+                  className="text-teal-700"
                 >
                   {posts[3].category}
                 </Link>
