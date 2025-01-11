@@ -38,7 +38,7 @@ const FilterComponent = () => {
             onChange={handleFilterChange}
             value="newest"
             id="newest"
-            className="appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm checked:bg-blue-800"
+            className="appearance-none w-4 h-4 border-[1.5px] border-teal-700 cursor-pointer rounded-sm checked:bg-teal-700"
           />
           Latest
         </label>
@@ -52,7 +52,7 @@ const FilterComponent = () => {
             onChange={handleFilterChange}
             value="popular"
             id="popular"
-            className="appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm checked:bg-blue-800"
+            className="appearance-none w-4 h-4 border-[1.5px] border-teal-700 cursor-pointer rounded-sm checked:bg-teal-700"
           />
           Most Popular
         </label>
@@ -66,7 +66,7 @@ const FilterComponent = () => {
             onChange={handleFilterChange}
             value="trending"
             id="trending"
-            className="appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm checked:bg-blue-800"
+            className="appearance-none w-4 h-4 border-[1.5px] border-teal-700 cursor-pointer rounded-sm checked:bg-teal-700"
           />
           Trending
         </label>
@@ -80,7 +80,7 @@ const FilterComponent = () => {
             onChange={handleFilterChange}
             value="oldest"
             id="oldest"
-            className="appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm checked:bg-blue-800"
+            className="appearance-none w-4 h-4 border-[1.5px] border-teal-700 cursor-pointer rounded-sm checked:bg-teal-700"
           />
           Oldest
         </label>
@@ -119,9 +119,9 @@ const FilterComponent = () => {
         </span>
         <span
           className="underline cursor-pointer"
-          onClick={() => handleCategoryChange("marketing")}
+          onClick={() => handleCategoryChange("ai")}
         >
-          Marketing
+          AI
         </span>
       </div>
     </div>
