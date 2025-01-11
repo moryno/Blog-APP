@@ -27,9 +27,9 @@ const SinglePost = () => {
           </h1>
           <div className="flex items-center gap-2 text-gray-400 text-sm">
             <span>Author</span>
-            <Link className="text-blue-800">{data.author.username}</Link>
+            <Link className="text-teal-700">{data.author.username}</Link>
             <span>on</span>
-            <Link className="text-blue-800">{data.category}</Link>
+            <Link className="text-teal-700">{data.category}</Link>
             <span>{moment(data.createdAt).fromNow()}</span>
           </div>
           <p className="text-gray-500 font-medium">{data.description}</p>
@@ -201,7 +201,7 @@ const SinglePost = () => {
               Search Engines
             </Link>
             <Link to="" className="underline">
-              Marketing
+              AI
             </Link>
           </div>
         </div>
