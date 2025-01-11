@@ -56,7 +56,7 @@ const Comments = ({ postId }) => {
         />
         <button
           disabled={createMutation.isPending}
-          className="bg-blue-800 px-4 py-3 text-white font-medium rounded-xl disabled:bg-blue-400 disabled:cursor-not-allowed"
+          className="bg-teal-700 px-4 py-3 text-white font-medium rounded-xl disabled:bg-teal-400 disabled:cursor-not-allowed"
           onClick={onCommentSave}
         >
           Comment
