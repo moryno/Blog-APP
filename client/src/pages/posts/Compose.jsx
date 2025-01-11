@@ -111,7 +111,7 @@ const Compose = () => {
             <option value="development">Development</option>
             <option value="databases">Databases</option>
             <option value="seo">Search Engines</option>
-            <option value="marketing">Marketing</option>
+            <option value="ai">AI</option>
           </select>
         </div>
         <textarea
@@ -147,7 +147,7 @@ const Compose = () => {
         </div>
         <button
           disabled={mutation.isPending || (0 < progress && progress < 100)}
-          className="w-36 bg-blue-800 text-white p-2 rounded-xl mt-4 disabled:bg-blue-400 disabled:cursor-not-allowed"
+          className="w-36 bg-teal-700 text-white p-2 rounded-xl mt-4 disabled:bg-teal-400 disabled:cursor-not-allowed"
         >
           {mutation.isPending ? "Loading..." : "Publish"}
         </button>
