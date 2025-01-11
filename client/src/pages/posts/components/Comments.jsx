@@ -45,21 +45,25 @@ const Comments = ({ postId }) => {
   };
 
   return (
-    <section className="flex flex-col gap-8 lg:w-3/5 mb-8">
-      <h1 className="text-xl text-gray-500 underline">Comments</h1>
-      <div className="flex items-center justify-between gap-8 w-full">
+    <section className="flex flex-col gap-8 mb-8">
+      <div className="lg:mb-8 sm:py-5 md:py-0 flex gap-2">
+        <h1 className="text-lg font-bold tracking-tight text-left text-gray-900 underline underline-offset-8 decoration-teal-700">
+          Comments
+        </h1>
+      </div>
+      <div className="flex items-center justify-between gap-8 w-[90%]">
         <textarea
           placeholder="Write a comment..."
-          className="w-full p-4 rounded-xl"
+          className="w-full p-4 rounded-xl outline-1 outline-teal-700"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
         <button
           disabled={createMutation.isPending}
-          className="bg-teal-700 px-4 py-3 text-white font-medium rounded-xl disabled:bg-teal-400 disabled:cursor-not-allowed"
+          className="bg-teal-700 px-4 py-3 text-white font-medium rounded-lg disabled:bg-teal-400 disabled:cursor-not-allowed"
           onClick={onCommentSave}
         >
-          Comment
+          Send
         </button>
       </div>
       {isPending ? (
