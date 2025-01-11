@@ -1,8 +1,8 @@
 import { useState } from "react";
-import FilterComponent from "./components/FilterComponent";
 import PostList from "./components/PostList";
 import { useSearchParams } from "react-router-dom";
 import { getCategoryName } from "../../helpers/common";
+import Sidebar from "../../components/Sidebar";
 
 const PostListPage = () => {
   const [open, setopen] = useState(false);
@@ -21,11 +21,15 @@ const PostListPage = () => {
         {open ? "Close" : "Filter or Search"}
       </button>
       <section className="flex flex-col-reverse md:flex-row gap-8">
-        <div className="">
+        <div className="w-[70%] 3xl:w-[75%]">
           <PostList />
         </div>
-        <div className={`${open ? "block" : "hidden"} md:block`}>
-          <FilterComponent />
+        <div
+          className={`${
+            open ? "block" : "hidden"
+          } md:block w-[30%] 3xl:w-[25%]`}
+        >
+          <Sidebar />
         </div>
       </section>
     </main>
