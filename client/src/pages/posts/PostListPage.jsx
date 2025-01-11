@@ -1,16 +1,22 @@
 import { useState } from "react";
 import FilterComponent from "./components/FilterComponent";
 import PostList from "./components/PostList";
+import { useSearchParams } from "react-router-dom";
+import { getCategoryName } from "../../helpers/common";
 
 const PostListPage = () => {
   const [open, setopen] = useState(false);
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category");
 
   return (
     <main>
-      <h1 className="mb-8 text-2xl">Development Blog</h1>
+      <h1 className="mb-8 text-4xl font-bold tracking-tight text-gray-900">
+        {category ? getCategoryName(category) : "Development Blog"}
+      </h1>
       <button
         onClick={() => setopen((prev) => !prev)}
-        className="bg-blue-800 text-sm text-white px-4 py-2 rounded-2xl mb-4 md:hidden"
+        className="bg-teal-700 text-sm text-white px-4 py-2 rounded-2xl mb-4 md:hidden"
       >
         {open ? "Close" : "Filter or Search"}
       </button>
