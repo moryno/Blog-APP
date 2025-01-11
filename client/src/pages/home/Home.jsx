@@ -13,7 +13,7 @@ const Home = () => {
         <BsDot />
         <span className="text-teal-700">Blogs and Articles</span>
       </section>
-      <sectin className="flex items-center justify-between">
+      <section className="flex items-center justify-between">
         <div>
           <h1 className="text-gray-800 text-2xl md:text-5xl lg:text-6xl font-bold">
             Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -61,7 +61,7 @@ const Home = () => {
             </svg>
           </button>
         </Link>
-      </sectin>
+      </section>
       <MainCategories />
       <FeaturedPost />
       <section className="flex gap-8">

@@ -13,6 +13,7 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 import "./index.css";
+import AppErrorBoundary from "./lib/AppErrorBoundary/index.jsx";
 
 const queryClient = new QueryClient();
 
@@ -58,7 +59,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <AppErrorBoundary>
+          <RouterProvider router={router} />
+        </AppErrorBoundary>
         <ToastContainer position="bottom-right" />
       </QueryClientProvider>
     </ClerkProvider>
