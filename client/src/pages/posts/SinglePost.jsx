@@ -9,9 +9,12 @@ import Comments from "./components/Comments";
 import { postService } from "../../services/post.service";
 import MenuPost from "../../components/MenuPost";
 import Categories from "../../components/Categories";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const SinglePost = () => {
   const { slug } = useParams();
+  const { theme } = useContext(ThemeContext);
 
   const navigate = useNavigate();
 
@@ -56,7 +59,11 @@ const SinglePost = () => {
       <section className="flex flex-col md:flex-row gap-8">
         <div className="lg:text-lg flex flex-col gap-6 text-justify w-[70%] 3xl:w-[75%]">
           <div
-            className="prose lg:prose-lg sm:px-0 md:px-0 lg:px-0"
+            className={`prose lg:prose-lg sm:px-0 md:px-0 lg:px-0 ${
+              theme === "dark"
+                ? "bg-gray-900 text-white"
+                : "bg-white text-black"
+            }`}
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(data?.content),
             }}

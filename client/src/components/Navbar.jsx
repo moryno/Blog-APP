@@ -8,6 +8,7 @@ import {
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { IoClose } from "react-icons/io5";
 import { MdMenu } from "react-icons/md";
+import ThemeToggle from "../lib/ThemeToggle";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -29,7 +30,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full h-16 md:h-20 flex items-center justify-between">
+    <div className="w-full h-16 md:h-20 flex items-center justify-between box-border">
       <Link to="/" className="flex items-center gap-4 text-2xl font-bold">
         <p>
           <span className="text-teal-700">S</span>
@@ -128,6 +129,7 @@ const Navbar = () => {
         <SignedIn>
           <UserButton />
         </SignedIn>
+        <ThemeToggle />
       </div>
     </div>
   );

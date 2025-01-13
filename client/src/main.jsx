@@ -15,6 +15,7 @@ import Register from "./pages/auth/Register.jsx";
 import "./index.css";
 import AppErrorBoundary from "./lib/AppErrorBoundary/index.jsx";
 import ScrollToTop from "./lib/ScrollToTop.jsx";
+import { ThemeContextProvider } from "./context/ThemeContext.jsx";
 
 const queryClient = new QueryClient();
 
@@ -65,7 +66,9 @@ createRoot(document.getElementById("root")).render(
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
       <QueryClientProvider client={queryClient}>
         <AppErrorBoundary>
-          <RouterProvider router={router} />
+          <ThemeContextProvider>
+            <RouterProvider router={router} />
+          </ThemeContextProvider>
         </AppErrorBoundary>
         <ToastContainer position="bottom-right" />
       </QueryClientProvider>

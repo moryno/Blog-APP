@@ -1,11 +1,15 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { BsDot } from "react-icons/bs";
 import MainCategories from "./components/MainCategories";
 import FeaturedPost from "./components/FeaturedPost";
 import PostList from "../posts/components/PostList";
 import Sidebar from "../../components/Sidebar";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const Home = () => {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <main className="mt-4 flex flex-col gap-4">
       <section className="flex gap-2 items-center">
@@ -15,7 +19,11 @@ const Home = () => {
       </section>
       <section className="flex items-center justify-between">
         <div>
-          <h1 className="text-gray-800 text-2xl md:text-5xl lg:text-6xl font-bold">
+          <h1
+            className={`text-[${
+              theme === "light" ? "#1f2937" : "#ddd"
+            }] text-2xl md:text-5xl lg:text-6xl font-bold`}
+          >
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry.
           </h1>

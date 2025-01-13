@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
 import SearchComponent from "../../../components/SearchComponent";
+import { useContext } from "react";
+import { ThemeContext } from "../../../context/ThemeContext";
 
 const MainCategories = () => {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <section className="hidden md:flex bg-white rounded-3xl xl:rounded-full p-4 shadow-lg items-center justify-center gap-8">
+    <section
+      className={`hidden md:flex  rounded-3xl xl:rounded-full p-4 ${
+        theme === "light" ? "shadow-lg" : "shadow-2xl"
+      } items-center justify-center gap-8`}
+    >
       <div className="flex-1 flex items-center justify-between flex-wrap">
         <Link
           to="/posts?category=general"
