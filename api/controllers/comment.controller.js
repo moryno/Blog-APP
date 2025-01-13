@@ -10,18 +10,12 @@ export const getComments = async (req, res) => {
 };
 
 export const createComment = async (req, res) => {
-  const clerkUserId = req.auth.userId;
-
-  if (!clerkUserId) return res.status(401).json("Not Authenticated!");
-
-  const user = await User.findOne({ clerkUserId });
   const post = await Post.findById(req.body.postId);
 
-  if (!user) return res.status(404).json("User not found!");
   if (!post) return res.status(404).json("Post not found!");
 
   const newComment = new Comment({
-    user: user._id,
+    user: req.userId,
     post: post._id,
     description: req.body.description,
   });

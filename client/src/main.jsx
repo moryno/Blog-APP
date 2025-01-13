@@ -14,6 +14,7 @@ import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 import "./index.css";
 import AppErrorBoundary from "./lib/AppErrorBoundary/index.jsx";
+import ScrollToTop from "./lib/ScrollToTop.jsx";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +26,11 @@ if (!PUBLISHABLE_KEY) {
 
 const router = createBrowserRouter([
   {
-    element: <MainLayout />,
+    element: (
+      <ScrollToTop>
+        <MainLayout />
+      </ScrollToTop>
+    ),
     children: [
       {
         path: "/",

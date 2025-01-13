@@ -4,7 +4,7 @@ import User from "../models/user.model.js";
 
 export const getPosts = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 2;
+  const limit = parseInt(req.query.limit) || 5;
 
   const query = {};
 
@@ -73,14 +73,6 @@ export const getPost = async (req, res) => {
 };
 
 export const createPost = async (req, res) => {
-  const clerkUserId = req.auth.userId;
-
-  if (!clerkUserId) return res.status(401).json("Not Authenticated!");
-
-  const user = await User.findOne({ clerkUserId });
-
-  if (!user) return res.status(404).json("User not found!");
-
   const postTitleExist = await Post.findOne({ title: req.body.title });
 
   if (postTitleExist)
@@ -89,7 +81,7 @@ export const createPost = async (req, res) => {
   const slug = req.body.title.replace(/ /g, "-").toLowerCase();
 
   const newPost = new Post({
-    author: user._id,
+    author: req.userId,
     slug,
     ...req.body,
   });
@@ -125,14 +117,7 @@ export const deletePost = async (req, res) => {
 };
 
 export const featurePost = async (req, res) => {
-  const clerkUserId = req.auth.userId;
   const postId = req.body.postId;
-
-  if (!clerkUserId) return res.status(401).json("Not Authenticated!");
-
-  const role = req.auth.sessionClaims?.metadata?.role || "user";
-
-  if (role !== "admin") return res.status(401).json("Not Authorized.");
 
   const post = await Post.findById(postId);
 

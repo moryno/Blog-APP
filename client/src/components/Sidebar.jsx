@@ -133,7 +133,7 @@ const Sidebar = () => {
           Editors Pick
         </h1>
       </div>
-      <MenuPost />
+      <MenuPost featured={true} />
     </div>
   );
 };

@@ -8,7 +8,6 @@ import {
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { IoClose } from "react-icons/io5";
 import { MdMenu } from "react-icons/md";
-import Image from "./Image";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -32,14 +31,11 @@ const Navbar = () => {
   return (
     <div className="w-full h-16 md:h-20 flex items-center justify-between">
       <Link to="/" className="flex items-center gap-4 text-2xl font-bold">
-        <Image
-          src="logo.png"
-          className="w-8 h-8"
-          alt="logo"
-          width={32}
-          height={32}
-        />
-        <span>spikelogo</span>
+        <p>
+          <span className="text-teal-700">S</span>
+          <span>pike</span> <span className="text-teal-700">B</span>
+          <span>log</span>
+        </p>
       </Link>
       <div className="md:hidden">
         <div
@@ -77,6 +73,14 @@ const Navbar = () => {
           >
             Latest
           </span>
+          <SignedIn>
+            <Link
+              to="/compose"
+              className="px-3 lg:text-md 2xl:text-lg font-medium text-gray-600 cursor-pointer hover:text-gray-100 hover:bg-teal-500 hover:transition-all hover:py-2 hover:rounded border-transparent"
+            >
+              Compose
+            </Link>
+          </SignedIn>
           <SignedOut>
             <Link to={"/login"}>Sign in</Link>
           </SignedOut>
@@ -85,7 +89,7 @@ const Navbar = () => {
           </SignedIn>
         </div>
       </div>
-      <div className="hidden md:flex items-center gap-8 xl:gap-12 font-medium">
+      <div className="hidden md:flex items-center gap-8 font-medium">
         <Link
           className="px-3 lg:text-md 2xl:text-lg font-medium text-gray-600 cursor-pointer hover:text-gray-100 hover:bg-teal-500 hover:transition-all hover:py-2 hover:rounded border-transparent"
           to={"/"}
@@ -110,7 +114,14 @@ const Navbar = () => {
         >
           Latest
         </span>
-
+        <SignedIn>
+          <Link
+            to="/compose"
+            className="px-3 lg:text-md 2xl:text-lg font-medium text-gray-600 cursor-pointer hover:text-gray-100 hover:bg-teal-500 hover:transition-all hover:py-2 hover:rounded border-transparent"
+          >
+            Compose
+          </Link>
+        </SignedIn>
         <SignedOut>
           <Link to={"/login"}>Sign in</Link>
         </SignedOut>
