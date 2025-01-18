@@ -12,6 +12,9 @@ export const ThemeContextProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
+
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(theme);
   }, [theme]);
 
   return (

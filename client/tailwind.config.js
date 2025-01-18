@@ -16,6 +16,14 @@ export default {
       flex: {
         4: "4 1 0%",
       },
+      backgroundColor: {
+        light: "#ffffff",
+        dark: "#0f172a",
+      },
+      textColor: {
+        light: "#000000",
+        dark: "#dddddd",
+      },
     },
   },
   plugins: [typography],
