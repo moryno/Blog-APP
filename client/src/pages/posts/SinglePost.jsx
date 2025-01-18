@@ -61,8 +61,8 @@ const SinglePost = () => {
           <div
             className={`prose lg:prose-lg sm:px-0 md:px-0 lg:px-0 ${
               theme === "dark"
-                ? "bg-gray-900 text-white"
-                : "bg-white text-black"
+                ? "prose-dark bg-dark text-dark"
+                : "bg-light text-light"
             }`}
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(data?.content),

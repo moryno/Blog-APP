@@ -22,7 +22,7 @@ const PostList = () => {
 
       return postService.getPosts({
         page: pageParam,
-        limit: 10,
+        limit: 1,
         ...searchParamsObj,
       });
     },

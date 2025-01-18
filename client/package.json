@@ -12,6 +12,7 @@
   "dependencies": {
     "@clerk/clerk-react": "^5.21.0",
     "@tanstack/react-query": "^5.62.11",
+    "antd": "^5.23.1",
     "axios": "^1.7.9",
     "dompurify": "^3.2.3",
     "imagekitio-react": "^4.2.0",
@@ -22,6 +23,7 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-quill-new": "^3.3.3",
     "react-router-dom": "^7.1.0",
+    "react-spinners": "^0.15.0",
     "react-toastify": "^11.0.2"
   },
   "devDependencies": {
