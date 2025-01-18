@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { postService } from "../services/post.service";
 import { getCategoryName } from "../helpers/common";
 import moment from "moment";
+import SkeletonComponent from "../lib/Skeleton/Skeleton";
 
 const Popular = () => {
   const { isPending, error, data } = useQuery({
@@ -13,13 +14,17 @@ const Popular = () => {
         sort: "popular",
       }),
   });
-  if (isPending) return <p>Loading...</p>;
+
   if (!isPending && error) return "An error has occured: " + error.message;
 
   const popularPosts = data?.posts || [];
 
   return (
     <div className="flex flex-col gap-2 mt-5 mb-14">
+      {isPending &&
+        Array(5)
+          .fill(0)
+          .map((i) => <SkeletonComponent key={i} />)}
       {popularPosts.map((post) => {
         const COLORS = {
           seo: "#775aec",

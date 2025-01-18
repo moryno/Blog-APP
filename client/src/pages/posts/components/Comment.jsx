@@ -4,11 +4,14 @@ import Image from "../../../components/Image";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { commentService } from "../../../services/comment.service";
 import { toast } from "react-toastify";
+import { ThemeContext } from "../../../context/ThemeContext";
+import { useContext } from "react";
 
 const Comment = ({ comment }) => {
   const { user } = useUser();
   const { getToken } = useAuth();
   const queryClient = useQueryClient();
+  const { theme } = useContext(ThemeContext);
 
   const deleteCommentMutation = useMutation({
     mutationFn: async () => {
@@ -31,7 +34,11 @@ const Comment = ({ comment }) => {
   };
 
   return (
-    <div className="p-4 bg-slate-50 rounded-xl">
+    <div
+      className={`p-4  rounded-xl ${
+        theme === "light" ? "bg-slate-50 text-light" : "bg-gray-800 text-dark"
+      }`}
+    >
       <div className="flex items-center gap-4">
         <Image
           src={comment.user.profileImage || "userImg.jpeg"}

@@ -3,6 +3,7 @@ import moment from "moment";
 import Image from "../../../components/Image";
 import { useQuery } from "@tanstack/react-query";
 import { postService } from "../../../services/post.service";
+import SkeletonComponent from "../../../lib/Skeleton/Skeleton";
 
 const FeaturedPost = () => {
   const { isPending, error, data } = useQuery({
@@ -10,7 +11,6 @@ const FeaturedPost = () => {
     queryFn: () => postService.getFeatured(),
   });
 
-  if (isPending) return <p>Loading...</p>;
   if (!isPending && error) return "An error has occured: " + error.message;
 
   const posts = data?.posts;
@@ -19,36 +19,45 @@ const FeaturedPost = () => {
   return (
     <section className="mt-8 flex flex-col lg:flex-row gap-8">
       <div className="w-full lg:w-1/2 flex flex-col gap-4">
-        <Image
-          src={posts[0].cover || "featured1.jpeg"}
-          alt={posts[0].title}
-          width="895"
-          className="rounded-lg object-cover shadow-md"
-        />
-        <div className="flex items-center gap-4">
-          <h1 className="flex items-center gap-4">01.</h1>
-          <Link
-            to={`/posts?category=${posts[0].category}`}
-            className="text-teal-700 lg:text-lg"
-          >
-            {posts[0].category}
-          </Link>
-          <span className="text-gray-500">
-            {moment(posts[0].createdAt).fromNow()}
-          </span>
-        </div>
-        <Link
-          to={`/${posts[0].slug}`}
-          className="text-xl lg:text-3xl font-semibold lg:font-bold"
-        >
-          {posts[0].title}
-        </Link>
-        <p className="sm:mb-2 md:mb-5 font-normal text-gray-700 dark:text-gray-400 lg:block hidden line-short">
-          {" "}
-          {posts[0].description}
-        </p>
+        {isPending && <SkeletonComponent />}
+        {posts[0] && (
+          <>
+            <Image
+              src={posts[0].cover || "featured1.jpeg"}
+              alt={posts[0].title}
+              width="895"
+              className="rounded-lg object-cover shadow-md"
+            />
+            <div className="flex items-center gap-4">
+              <h1 className="flex items-center gap-4">01.</h1>
+              <Link
+                to={`/posts?category=${posts[0].category}`}
+                className="text-teal-700 lg:text-lg"
+              >
+                {posts[0].category}
+              </Link>
+              <span className="text-gray-500">
+                {moment(posts[0].createdAt).fromNow()}
+              </span>
+            </div>
+            <Link
+              to={`/${posts[0].slug}`}
+              className="text-xl lg:text-3xl font-semibold lg:font-bold"
+            >
+              {posts[0].title}
+            </Link>
+            <p className="sm:mb-2 md:mb-5 font-normal text-gray-700 dark:text-gray-400 lg:block hidden line-short">
+              {" "}
+              {posts[0].description}
+            </p>
+          </>
+        )}
       </div>
       <div className="w-full lg:w-1/2 flex flex-col gap-4">
+        {isPending &&
+          Array(2)
+            .fill(0)
+            .map((i) => <SkeletonComponent key={i} />)}
         {posts[1] && (
           <div className="lg:h-1/3 flex justify-between gap-4">
             <div className=" w-1/3 aspect-video">

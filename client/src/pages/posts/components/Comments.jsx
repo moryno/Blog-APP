@@ -3,11 +3,13 @@ import Comment from "./Comment";
 import { commentService } from "../../../services/comment.service";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../../context/ThemeContext";
 
 const Comments = ({ postId }) => {
   const [comment, setComment] = useState("");
+  const { theme } = useContext(ThemeContext);
 
   const { getToken } = useAuth();
   const { user } = useUser();
@@ -47,14 +49,20 @@ const Comments = ({ postId }) => {
   return (
     <section className="flex flex-col gap-8 mb-8">
       <div className="lg:mb-8 sm:py-5 md:py-0 flex gap-2">
-        <h1 className="text-lg font-bold tracking-tight text-left text-gray-900 underline underline-offset-8 decoration-teal-700">
+        <h1
+          className={`text-lg font-bold tracking-tight text-left  underline underline-offset-8 decoration-teal-700
+        ${theme === "light" ? "bg-light text-gray-800" : "bg-dark text-dark"}
+        `}
+        >
           Comments
         </h1>
       </div>
       <div className="flex items-center justify-between gap-8 w-[90%]">
         <textarea
           placeholder="Write a comment..."
-          className="w-full p-4 rounded-xl outline-1 outline-teal-700"
+          className={`w-full p-4 rounded-xl outline-1 outline-teal-700 ${
+            theme === "light" ? "bg-light text-light" : "bg-dark text-dark"
+          }`}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />

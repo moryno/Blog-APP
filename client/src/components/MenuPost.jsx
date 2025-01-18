@@ -4,6 +4,7 @@ import { postService } from "../services/post.service";
 import { useQuery } from "@tanstack/react-query";
 import { getCategoryName } from "../helpers/common";
 import moment from "moment";
+import SkeletonComponent from "../lib/Skeleton/Skeleton";
 
 const MenuPost = ({ featured = false, category = null }) => {
   const { isPending, error, data } = useQuery({
@@ -16,13 +17,17 @@ const MenuPost = ({ featured = false, category = null }) => {
             category,
           }),
   });
-  if (isPending) return <p>Loading...</p>;
+
   if (!isPending && error) return "An error has occured: " + error.message;
 
   const posts = data?.posts || [];
 
   return (
     <div className="flex flex-col gap-8 mt-5 mb-14">
+      {isPending &&
+        Array(4)
+          .fill(0)
+          .map((i) => <SkeletonComponent key={i} />)}
       {posts.map((post) => {
         const COLORS = {
           seo: "#775aec",
@@ -33,15 +38,18 @@ const MenuPost = ({ featured = false, category = null }) => {
           databases: "#ff7887",
         };
         return (
-          <div key={post._id} className="flex items-center gap-5">
-            <div className="w-1/5 aspect-square relative">
+          <div
+            key={post._id}
+            className="flex items-start xl:items-center gap-5"
+          >
+            <div className="hidden lg:block w-1/5 aspect-square relative">
               <Image
                 src={post.cover || "postImg.jpeg"}
                 alt={post.title}
                 className="w-full h-full rounded-full border border-gray-200 object-cover"
               />
             </div>
-            <div className="w-4/5 flex flex-col gap-1">
+            <div className="w-full lg:w-4/5 flex flex-col gap-1">
               <Link
                 to={`/posts?category=${post.category}`}
                 className={`py-[3px] px-2 text-xs rounded-xl text-white bg-[${

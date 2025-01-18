@@ -11,7 +11,7 @@ const PostListPage = () => {
 
   return (
     <main>
-      <h1 className="mb-8 text-4xl font-bold tracking-tight text-gray-900">
+      <h1 className="mb-8 text-4xl font-bold tracking-tight">
         {category ? getCategoryName(category) : "Development Blog"}
       </h1>
       <button
@@ -21,7 +21,7 @@ const PostListPage = () => {
         {open ? "Close" : "Filter or Search"}
       </button>
       <section className="flex flex-col-reverse md:flex-row gap-8">
-        <div className="w-[70%] 3xl:w-[75%]">
+        <div className="w-full md:w-[70%] 3xl:w-[75%]">
           <PostList />
         </div>
         <div

@@ -11,6 +11,7 @@ import MenuPost from "../../components/MenuPost";
 import Categories from "../../components/Categories";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
+import Loader from "../../lib/Loader";
 
 const SinglePost = () => {
   const { slug } = useParams();
@@ -27,7 +28,7 @@ const SinglePost = () => {
     navigate(`/posts?category=${category}`);
   };
 
-  if (isPending) return <p>Loading...</p>;
+  if (isPending) return <Loader />;
   if (!isPending && error) return "An error has occured: " + error.message;
   if (!data) return "Post not found.";
 

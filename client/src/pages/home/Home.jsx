@@ -73,13 +73,13 @@ const Home = () => {
       <MainCategories />
       <FeaturedPost />
       <section className="flex gap-8">
-        <section className="w-[70%] 3xl:w-[75%]">
-          <h1 className="my-8  text-3xl font-bold tracking-tight text-gray-900">
+        <section className="w-full md:w-[70%] 3xl:w-[75%]">
+          <h1 className="my-8 text-3xl font-bold tracking-tight text-gray-900">
             Recent Posts
           </h1>
           <PostList />
         </section>
-        <section className="w-[30%] 3xl:w-[25%]">
+        <section className="hidden md:block w-[30%] 3xl:w-[25%]">
           <Sidebar />
         </section>
       </section>

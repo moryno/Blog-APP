@@ -49,7 +49,7 @@ const Sidebar = () => {
                 onChange={handleFilterChange}
                 value="newest"
                 id="newest"
-                className="appearance-none w-4 h-4 border-[1.5px] border-real-700 cursor-pointer rounded-sm checked:bg-real-700"
+                className="appearance-none w-4 h-4 border-[1.5px] border-real-700 cursor-pointer rounded-sm checked:bg-teal-700"
               />
               Latest
             </label>
@@ -63,7 +63,7 @@ const Sidebar = () => {
                 onChange={handleFilterChange}
                 value="popular"
                 id="popular"
-                className="appearance-none w-4 h-4 border-[1.5px] border-real-700 cursor-pointer rounded-sm checked:bg-real-700"
+                className="appearance-none w-4 h-4 border-[1.5px] border-real-700 cursor-pointer rounded-sm checked:bg-teal-700"
               />
               Most Popular
             </label>
@@ -77,7 +77,7 @@ const Sidebar = () => {
                 onChange={handleFilterChange}
                 value="trending"
                 id="trending"
-                className="appearance-none w-4 h-4 border-[1.5px] border-real-700 cursor-pointer rounded-sm checked:bg-real-700"
+                className="appearance-none w-4 h-4 border-[1.5px] border-real-700 cursor-pointer rounded-sm checked:bg-teal-700"
               />
               Trending
             </label>
@@ -91,7 +91,7 @@ const Sidebar = () => {
                 onChange={handleFilterChange}
                 value="oldest"
                 id="oldest"
-                className="appearance-none w-4 h-4 border-[1.5px] border-real-700 cursor-pointer rounded-sm checked:bg-real-700"
+                className="appearance-none w-4 h-4 border-[1.5px] border-real-700 cursor-pointer rounded-sm checked:bg-teal-700"
               />
               Oldest
             </label>
