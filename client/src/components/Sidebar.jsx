@@ -99,9 +99,9 @@ const Sidebar = () => {
         </>
       )}
       {/*      MOST POPULAR     */}
-      <p className="mt-8 text-gray-500 text-sm font-normal">What&apos;s hot</p>
+      <p className="mt-8  text-sm font-normal">What&apos;s hot</p>
       <div className="lg:mb-8 sm:py-5 md:py-0 flex gap-2">
-        <h1 className="text-lg font-bold tracking-tight text-left text-gray-900 underline underline-offset-8 decoration-teal-700">
+        <h1 className="text-lg font-bold tracking-tight text-left underline underline-offset-8 decoration-teal-700">
           Most Popular
         </h1>
         <div>
@@ -114,22 +114,18 @@ const Sidebar = () => {
       <Popular />
 
       {/*      CATEGORIES     */}
-      <p className="mt-8 text-gray-500 text-sm font-normal">
-        Discover by topic
-      </p>
+      <p className="mt-8  text-sm font-normal">Discover by topic</p>
       <div className="lg:mb-8 sm:py-5 md:py-0 flex gap-2">
-        <h1 className="text-lg font-bold tracking-tight text-left text-gray-900 underline underline-offset-8 decoration-teal-700">
+        <h1 className="text-lg font-bold tracking-tight text-left underline underline-offset-8 decoration-teal-700">
           Categories
         </h1>
       </div>
       <Categories onCategoryChange={handleCategoryChange} />
 
       {/*      EDITORS PICK     */}
-      <p className="mt-8 text-gray-500 text-sm font-normal">
-        Chosen by the editor
-      </p>
+      <p className="mt-8  text-sm font-normal">Chosen by the editor</p>
       <div className="lg:mb-8 sm:py-5 md:py-0 flex gap-2">
-        <h1 className="text-lg font-bold tracking-tight text-left text-gray-900 underline underline-offset-8 decoration-teal-700">
+        <h1 className="text-lg font-bold tracking-tight text-left underline underline-offset-8 decoration-teal-700">
           Editors Pick
         </h1>
       </div>

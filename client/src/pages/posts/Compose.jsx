@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser, useAuth } from "@clerk/clerk-react";
 import "react-quill-new/dist/quill.snow.css";
@@ -8,13 +8,17 @@ import { toast } from "react-toastify";
 import { postService } from "../../services/post.service";
 import { FcAddImage, FcVideoFile } from "react-icons/fc";
 import Upload from "../../components/Upload";
+import Image from "../../components/Image";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const Compose = () => {
   const [content, setContent] = useState("");
   const [cover, setCover] = useState("");
+  const [coverProgress, setCoverProgress] = useState(0);
   const [img, setImage] = useState("");
   const [video, setVideo] = useState("");
   const [progress, setProgress] = useState(0);
+  const { theme } = useContext(ThemeContext);
 
   const { isLoaded, isSignedIn } = useUser();
   const { getToken } = useAuth();
@@ -49,6 +53,9 @@ const Compose = () => {
   const onUploadSuccess = useCallback((res) => {
     setCover(res);
   }, []);
+  const onCoverUploadProgress = useCallback((progress) => {
+    setCoverProgress(progress);
+  }, []);
   const onUploadProgress = useCallback((progress) => {
     setProgress(progress);
   }, []);
@@ -81,19 +88,32 @@ const Compose = () => {
   return (
     <main className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col gap-6">
       <h1 className="text-xl font-light">Create a New Post</h1>
+
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1 mb-6">
         <Upload
           type="image"
           onSuccess={onUploadSuccess}
-          onProgress={onUploadProgress}
+          onProgress={onCoverUploadProgress}
         >
           <button className="w-max p-2 shadow-lg rounded-xl text-sm text-gray-500">
             Add a cover image
           </button>
         </Upload>
+        {0 < coverProgress && coverProgress < 100 ? (
+          <p>Loading cover image...</p>
+        ) : (
+          cover && (
+            <Image
+              className="w-[50em] h-64 rounded-lg object-cover shadow-md"
+              src={cover.filePath || ""}
+              width="895"
+              alt="this is post cover"
+            />
+          )
+        )}
         <input
           type="text"
-          placeholder="My Awesome Story"
+          placeholder="Title"
           className="text-4xl font-semibold bg-transparent outline-none"
           name="title"
         />
@@ -104,7 +124,11 @@ const Compose = () => {
           <select
             name="category"
             id="category"
-            className="p-2 rounded-xl shadow-lg"
+            className={`p-2 rounded-xl shadow-lg ${
+              theme === "light"
+                ? "bg-light text-light"
+                : "bg-gray-800 text-dark"
+            }`}
           >
             <option value="general">General</option>
             <option value="web-design">Web Design</option>
@@ -117,7 +141,9 @@ const Compose = () => {
         <textarea
           name="description"
           placeholder="A short Description"
-          className="p-4 rounded-xl shadow-lg outline-none"
+          className={`p-4 rounded-xl shadow-lg outline-none ${
+            theme === "light" ? "bg-light text-light" : "bg-gray-800 text-dark"
+          }`}
         />
         <div className="flex flex-1">
           <div className="flex flex-col gap-2 mr-2">
@@ -142,11 +168,19 @@ const Compose = () => {
             onChange={setContent}
             value={content}
             readOnly={0 < progress && progress < 100}
-            className="flex-1 rounded-xl shadow-lg"
+            className={`flex-1 rounded-xl shadow-lg ${
+              theme === "light"
+                ? "bg-light text-light"
+                : "bg-gray-800 text-dark"
+            }`}
           />
         </div>
         <button
-          disabled={mutation.isPending || (0 < progress && progress < 100)}
+          disabled={
+            mutation.isPending ||
+            (0 < progress && progress < 100) ||
+            (0 < coverProgress && coverProgress < 100)
+          }
           className="w-36 bg-teal-700 text-white p-2 rounded-xl mt-4 disabled:bg-teal-400 disabled:cursor-not-allowed"
         >
           {mutation.isPending ? "Loading..." : "Publish"}

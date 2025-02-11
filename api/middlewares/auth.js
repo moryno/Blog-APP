@@ -13,7 +13,7 @@ export const authenticate = async (req, res, next) => {
   next();
 };
 
-export const verifyAdmin = (req, res) => {
+export const verifyAdmin = (req, res, next) => {
   const clerkUserId = req.auth.userId;
   if (!clerkUserId) return res.status(401).json("Not Authenticated!");
 

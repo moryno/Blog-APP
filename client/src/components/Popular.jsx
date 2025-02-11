@@ -51,13 +51,11 @@ const Popular = () => {
               to={`/posts?author=${post.author.username}`}
               className="text-xs flex items-center gap-1"
             >
-              <span className="font-medium text-gray-600 text-[13px] underline underline-offset-2">
+              <span className="font-medium text-[13px] underline underline-offset-2">
                 {post.author.username}
               </span>
               <span>-</span>
-              <span className="text-gray-700">
-                {moment(post.createdAt).format("D-MM-YYYY")}
-              </span>
+              <span>{moment(post.createdAt).format("D-MM-YYYY")}</span>
             </Link>
           </div>
         );

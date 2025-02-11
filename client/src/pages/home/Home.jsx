@@ -22,15 +22,16 @@ const Home = () => {
           <h1
             className={`text-[${
               theme === "light" ? "#1f2937" : "#ddd"
-            }] text-2xl md:text-5xl lg:text-6xl font-bold`}
+            }] text-2xl md:text-5xl lg:text-5xl 3xl:text-6xl font-bold`}
           >
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            TechSphere: Your Ultimate Hub for Exploring, Sharing, and Connecting
+            Through Tech Insights.
           </h1>
           <p className="mt-8 text-base md:text-xl">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s
+            Discover, create, and collaborate on the latest tech trends. From
+            coding tips to gadget reviews, share your posts, explore categories,
+            and join a community of tech enthusiasts shaping the future of
+            innovation.
           </p>
         </div>
         <Link to="/compose" className="hidden md:block relative">
@@ -74,7 +75,7 @@ const Home = () => {
       <FeaturedPost />
       <section className="flex gap-8">
         <section className="w-full md:w-[70%] 3xl:w-[75%]">
-          <h1 className="my-8 text-3xl font-bold tracking-tight text-gray-900">
+          <h1 className="my-8 text-3xl font-bold tracking-tight">
             Recent Posts
           </h1>
           <PostList />

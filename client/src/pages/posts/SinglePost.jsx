@@ -46,7 +46,13 @@ const SinglePost = () => {
             <Link className="text-teal-700">{data.category}</Link>
             <span>{moment(data.createdAt).fromNow()}</span>
           </div>
-          <p className="text-gray-500 font-medium">{data.description}</p>
+          <p
+            className={`font-medium ${
+              theme === "light" ? "bg-light text-gray-500" : "bg-dark text-dark"
+            }`}
+          >
+            {data.description}
+          </p>
         </div>
         <div className="hidden lg:block w-2/5">
           <Image
